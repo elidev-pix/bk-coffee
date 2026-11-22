@@ -41,3 +41,14 @@ export function salesByDay(orders: Order[], days = 7, now = new Date()) {
   }
   return out
 }
+
+/** Chiffre d'affaires par heure sur la journée de `now` (heures 7 à 21). */
+export function salesByHour(orders: Order[], now = new Date()) {
+  const start = new Date(now); start.setHours(0, 0, 0, 0)
+  const end = new Date(start); end.setDate(start.getDate() + 1)
+  const today = orders.filter((o) => isRevenueOrder(o) && new Date(o.createdAt) >= start && new Date(o.createdAt) < end)
+  return Array.from({ length: 15 }, (_, i) => {
+    const h = i + 7
+    return { label: `${String(h).padStart(2, '0')}h`, revenue: today.filter((o) => new Date(o.createdAt).getHours() === h).reduce((s, o) => s + o.total, 0) }
+  })
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Maximize, Minimize } from 'lucide-react'
 import logo from '../assets/logo-bk-coffee.webp'
 import { useAppState } from '../state/store'
+import ThemeToggle from '../components/ThemeToggle'
 import { cx } from '../lib/cx'
 
 const HIGHLIGHT_MS = 20_000
@@ -25,7 +26,7 @@ export default function Display() {
 
   return (
     <div className="relative flex min-h-screen flex-col p-6 md:p-10">
-      <img src={logo} alt="" aria-hidden className="pointer-events-none absolute top-1/2 left-1/2 w-[34rem] max-w-[60vw] -translate-x-1/2 -translate-y-1/2 opacity-[0.06]" />
+      <img src={logo} alt="" aria-hidden className="watermark pointer-events-none absolute top-1/2 left-1/2 w-[34rem] max-w-[60vw] -translate-x-1/2 -translate-y-1/2" />
       <div className="relative grid flex-1 gap-8 lg:grid-cols-2">
         <section aria-labelledby="prep-title" className="rounded-card border border-line bg-surface-alt/80 p-8">
           <h1 id="prep-title" className="text-center font-display text-4xl font-bold tracking-wide text-muted uppercase md:text-6xl">En préparation</h1>
@@ -51,7 +52,7 @@ export default function Display() {
       </div>
       <div className="relative mt-4 flex items-center justify-between text-muted">
         <time className="font-display text-2xl" dateTime={new Date(now).toISOString()}>{clock.format(now)}</time>
-        <button type="button" onClick={toggleFs} aria-label={full ? 'Quitter le plein écran' : 'Passer en plein écran'} className="rounded-control p-2 opacity-40 transition-opacity hover:opacity-100 focus-visible:opacity-100">{full ? <Minimize size={22} aria-hidden /> : <Maximize size={22} aria-hidden />}</button>
+        <div className="flex items-center gap-3 opacity-50 transition-opacity focus-within:opacity-100 hover:opacity-100"><ThemeToggle compact /><button type="button" onClick={toggleFs} aria-label={full ? 'Quitter le plein écran' : 'Passer en plein écran'} className="rounded-control p-2">{full ? <Minimize size={22} aria-hidden /> : <Maximize size={22} aria-hidden />}</button></div>
       </div>
     </div>
   )

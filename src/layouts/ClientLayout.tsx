@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { ShoppingBag } from 'lucide-react'
 import BrandMark from '../components/BrandMark'
+import ThemeToggle from '../components/ThemeToggle'
 import { useAppState } from '../state/store'
 import { useCart } from '../state/cart'
 import { PENDING_INFO } from '../lib/labels'
@@ -25,6 +26,7 @@ export default function ClientLayout() {
               {count > 0 && <span className="rounded-full bg-brand px-2 text-xs font-bold text-brand-contrast" aria-label={`${count} article${count > 1 ? 's' : ''}`}>{count}</span>}
             </NavLink>
           </nav>
+          <ThemeToggle compact className="hidden sm:inline-flex" />
         </div>
       </header>
       <main className="flex-1"><Outlet /></main>
@@ -34,7 +36,7 @@ export default function ClientLayout() {
           <p>Adresse : {e.address || PENDING_INFO}</p>
           <p>Téléphone : {e.phone || PENDING_INFO}<br />Horaires : {e.hours || PENDING_INFO}</p>
         </div>
-        <p className="border-t border-line px-4 py-3 text-center text-xs">Démonstration : données fictives, paiement simulé, stockage local à ce navigateur.</p>
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-3 text-xs"><p>Démonstration : données fictives, paiement simulé, stockage local à ce navigateur.</p><ThemeToggle compact /></div>
       </footer>
     </div>
   )

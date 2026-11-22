@@ -13,3 +13,9 @@ export function useCatalog() {
   }, [products, categoryId, query])
   return { categories: sortedCategories, visible, categoryId, setCategoryId, query, setQuery }
 }
+
+/** Employé de démonstration utilisé comme auteur des actions faites depuis l'administration. */
+export function useAdminActor() {
+  const { employees } = useAppState()
+  return (employees.find((e) => e.active && e.role === 'administrateur') ?? employees.find((e) => e.active))?.id
+}

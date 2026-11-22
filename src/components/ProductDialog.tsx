@@ -21,7 +21,7 @@ function Body({ product, onAdd, onClose, big }: { product: Product; onAdd: (i: C
           <legend className="label-caps mb-2 text-muted">Options</legend>
           {product.options.map((o) => (
             <label key={o.id} className="flex cursor-pointer items-center justify-between gap-3 rounded-control border border-line p-3 has-[:checked]:border-brand has-[:checked]:bg-accent-soft">
-              <span className="flex items-center gap-3"><input type="checkbox" className="size-5 accent-[#e9c176]" checked={optionIds.includes(o.id)} onChange={(e) => setOptionIds(e.target.checked ? [...optionIds, o.id] : optionIds.filter((x) => x !== o.id))} />{o.label}</span>
+              <span className="flex items-center gap-3"><input type="checkbox" className="size-5 accent-brand" checked={optionIds.includes(o.id)} onChange={(e) => setOptionIds(e.target.checked ? [...optionIds, o.id] : optionIds.filter((x) => x !== o.id))} />{o.label}</span>
               <span className="text-sm text-muted">+ {formatFCFA(o.extraPrice)}</span>
             </label>
           ))}
