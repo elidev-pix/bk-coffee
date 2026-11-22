@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Pending from '../components/Pending'
 import AdminLayout from '../layouts/AdminLayout'
 import ClientLayout from '../layouts/ClientLayout'
 import DisplayLayout from '../layouts/DisplayLayout'
@@ -13,9 +12,14 @@ import Kiosk from '../pages/Kiosk'
 import Menu from '../pages/Menu'
 import OrderTracking from '../pages/OrderTracking'
 import Pos from '../pages/Pos'
+import AdminEmployees from '../pages/admin/AdminEmployees'
+import AdminOrders from '../pages/admin/AdminOrders'
+import AdminProducts from '../pages/admin/AdminProducts'
+import AdminSchedule from '../pages/admin/AdminSchedule'
+import AdminSettings from '../pages/admin/AdminSettings'
+import Dashboard from '../pages/admin/Dashboard'
 import NotFound from '../pages/NotFound'
 
-const L3 = 'Lot 3'
 
 export const router = createBrowserRouter([
   {
@@ -35,12 +39,12 @@ export const router = createBrowserRouter([
     path: '/admin',
     element: <AdminLayout />,
     children: [
-      { index: true, element: <Pending title="Dashboard" lot={L3} /> },
-      { path: 'commandes', element: <Pending title="Commandes" lot={L3} /> },
-      { path: 'produits', element: <Pending title="Produits" lot={L3} /> },
-      { path: 'employes', element: <Pending title="Employés" lot={L3} /> },
-      { path: 'horaires', element: <Pending title="Horaires" lot={L3} /> },
-      { path: 'parametres', element: <Pending title="Paramètres" lot={L3} /> },
+      { index: true, element: <Dashboard /> },
+      { path: 'commandes', element: <AdminOrders /> },
+      { path: 'produits', element: <AdminProducts /> },
+      { path: 'employes', element: <AdminEmployees /> },
+      { path: 'horaires', element: <AdminSchedule /> },
+      { path: 'parametres', element: <AdminSettings /> },
     ],
   },
   { path: '*', element: <NotFound /> },

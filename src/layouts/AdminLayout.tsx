@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import BrandMark from '../components/BrandMark'
+import ThemeToggle from '../components/ThemeToggle'
 import { cx } from '../lib/cx'
 
 const items = [
@@ -15,8 +16,8 @@ export default function AdminLayout() {
     <div className="min-h-screen lg:flex">
       <aside className="border-b border-line bg-surface lg:w-60 lg:border-r lg:border-b-0">
         <div className="flex items-center justify-between px-4 py-3 lg:block">
-          <BrandMark text size={40} />
-          <Link to="/" className="text-xs text-muted hover:text-brand lg:mt-2 lg:block">Retour accueil</Link>
+          <BrandMark text size={36} className="[&_span]:text-base" />
+          <div className="flex items-center gap-3 lg:mt-3"><Link to="/" className="text-xs text-muted hover:text-brand">Retour accueil</Link><ThemeToggle compact /></div>
         </div>
         <nav aria-label="Administration" className="flex gap-1 overflow-x-auto px-3 pb-3 lg:flex-col lg:overflow-visible">
           {items.map(([to, label, end]) => <NavLink key={to} to={to} end={end} className={link}>{label}</NavLink>)}

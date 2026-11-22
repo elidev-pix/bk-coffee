@@ -63,7 +63,7 @@ export default function Checkout() {
           <div className="grid gap-3 sm:grid-cols-2">
             {([['especes', 'Espèces au retrait', 'Réglez au comptoir en récupérant votre commande.'], ['mobile_money', 'Mobile Money (simulé)', 'Paiement simulé — aucun débit réel.']] as const).map(([v, t, d]) => (
               <label key={v} className={cx('cursor-pointer rounded-card border p-4', method === v ? 'border-brand bg-accent-soft' : 'border-line hover:border-brand-strong')}>
-                <input type="radio" name="method" value={v} checked={method === v} onChange={() => setMethod(v)} className="mr-2 accent-[#e9c176]" />
+                <input type="radio" name="method" value={v} checked={method === v} onChange={() => setMethod(v)} className="mr-2 accent-brand" />
                 <span className="font-semibold">{t}</span><span className="mt-1 block text-sm text-muted">{d}</span>
               </label>
             ))}

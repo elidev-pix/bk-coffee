@@ -36,19 +36,62 @@
   --shadow-glow: 0 0 18px rgb(233 193 118 / 0.28);
 }
 
+/* Variables non-couleur dépendantes du thème (sombre par défaut). */
+:root {
+  --glow: 233 193 118;
+  --dot: 197 160 89 / 0.07;
+  --glass-fallback: 19 19 19 / 0.94;
+  --glass-tint: 245 245 220 / 0.07;
+  --glass-border: 197 160 89 / 0.2;
+  --watermark-opacity: 0.06;
+  color-scheme: dark;
+}
+
+/* THÈME CLAIR — palette crème / espresso ; l'or devient bronze pour garder un contraste de texte suffisant. */
+:root[data-theme="light"] {
+  --color-canvas: #faf6ee;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f4ede1;
+  --color-surface-raised: #ece2d1;
+  --color-line: #d8cbb6;
+  --color-line-strong: #86765f;
+  --color-ink: #241a10;
+  --color-muted: #5b4c3c;
+  --color-brand: #6f4a00;
+  --color-brand-strong: #9a6f1c;
+  --color-brand-contrast: #fffaf0;
+  --color-accent: #9a6f1c;
+  --color-accent-soft: #f3e6c8;
+  --color-ok: #3b662a;
+  --color-ok-soft: #e4efd9;
+  --color-warn: #7a5200;
+  --color-danger: #a3261b;
+  --color-danger-soft: #fbe1dd;
+  --color-info: #1f5d96;
+  --color-info-soft: #dcebf7;
+  --shadow-card: 0 8px 24px rgb(60 40 10 / 0.12);
+  --shadow-glow: 0 0 16px rgb(111 74 0 / 0.25);
+  --glow: 154 111 28;
+  --dot: 111 74 0 / 0.06;
+  --glass-fallback: 255 252 245 / 0.96;
+  --glass-tint: 255 255 255 / 0.7;
+  --glass-border: 111 74 0 / 0.22;
+  --watermark-opacity: 0.05;
+}
+
 html, body, #root { min-height: 100%; }
 body { background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
 /* Motif géométrique très discret en fond (inspiration textile). */
 .bg-pattern {
-  background-image: radial-gradient(rgb(197 160 89 / 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(var(--dot)) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
 /* Glass : réservé à la navigation, panneaux flottants et modales. Fond de secours quasi opaque. */
-.glass { background: rgb(19 19 19 / 0.94); border: 1px solid rgb(197 160 89 / 0.2); }
+.glass { background: rgb(var(--glass-fallback)); border: 1px solid rgb(var(--glass-border)); }
 @supports (backdrop-filter: blur(1px)) {
-  .glass { background: rgb(245 245 220 / 0.07); backdrop-filter: blur(12px); }
+  .glass { background: rgb(var(--glass-tint)); backdrop-filter: blur(12px); }
 }
 
 .label-caps { font-size: 0.75rem; line-height: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -57,7 +100,8 @@ body { background: var(--color-canvas); color: var(--color-ink); font-family: va
 dialog::backdrop { background: rgb(0 0 0 / 0.7); }
 
 @keyframes pop-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
-@keyframes ready-glow { 0%, 100% { box-shadow: 0 0 0 rgb(233 193 118 / 0); } 50% { box-shadow: 0 0 36px rgb(233 193 118 / 0.55); } }
+@keyframes ready-glow { 0%, 100% { box-shadow: 0 0 0 rgb(var(--glow) / 0); } 50% { box-shadow: 0 0 36px rgb(var(--glow) / 0.55); } }
+.watermark { opacity: var(--watermark-opacity); }
 .animate-pop-in { animation: pop-in 0.18s ease-out; }
 .animate-ready-glow { animation: ready-glow 1.6s ease-in-out 5; }
 
