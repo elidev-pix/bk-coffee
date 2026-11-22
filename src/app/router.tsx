@@ -5,10 +5,16 @@ import ClientLayout from '../layouts/ClientLayout'
 import DisplayLayout from '../layouts/DisplayLayout'
 import KioskLayout from '../layouts/KioskLayout'
 import PosLayout from '../layouts/PosLayout'
+import CartPage from '../pages/CartPage'
+import Checkout from '../pages/Checkout'
+import Display from '../pages/Display'
 import Home from '../pages/Home'
+import Kiosk from '../pages/Kiosk'
+import Menu from '../pages/Menu'
+import OrderTracking from '../pages/OrderTracking'
+import Pos from '../pages/Pos'
 import NotFound from '../pages/NotFound'
 
-const L2 = 'Lot 2'
 const L3 = 'Lot 3'
 
 export const router = createBrowserRouter([
@@ -16,15 +22,15 @@ export const router = createBrowserRouter([
     element: <ClientLayout />,
     children: [
       { path: '/', element: <Home /> },
-      { path: '/menu', element: <Pending title="Menu" lot={L2} /> },
-      { path: '/panier', element: <Pending title="Panier" lot={L2} /> },
-      { path: '/commande', element: <Pending title="Commande" lot={L2} /> },
-      { path: '/commande/:orderId', element: <Pending title="Suivi de commande" lot={L2} /> },
+      { path: '/menu', element: <Menu /> },
+      { path: '/panier', element: <CartPage /> },
+      { path: '/commande', element: <Checkout /> },
+      { path: '/commande/:orderId', element: <OrderTracking /> },
     ],
   },
-  { element: <KioskLayout />, children: [{ path: '/borne', element: <Pending title="Borne de commande" lot={L2} /> }] },
-  { element: <PosLayout />, children: [{ path: '/caisse', element: <Pending title="Caisse POS" lot={L2} /> }] },
-  { element: <DisplayLayout />, children: [{ path: '/affichage', element: <Pending title="Affichage public" lot={L2} /> }] },
+  { element: <KioskLayout />, children: [{ path: '/borne', element: <Kiosk /> }] },
+  { element: <PosLayout />, children: [{ path: '/caisse', element: <Pos /> }] },
+  { element: <DisplayLayout />, children: [{ path: '/affichage', element: <Display /> }] },
   {
     path: '/admin',
     element: <AdminLayout />,

@@ -3,12 +3,12 @@ import BrandMark from '../components/BrandMark'
 
 export default function KioskLayout() {
   return (
-    <div className="flex min-h-screen flex-col bg-canvas">
-      <header className="flex items-center justify-between bg-brand px-8 py-4 text-brand-contrast">
-        <BrandMark className="text-3xl" />
-        <Link to="/" className="text-sm opacity-70 hover:opacity-100">Quitter la borne (démo)</Link>
+    <div className="bg-pattern flex h-screen flex-col overflow-hidden">
+      <header className="glass flex items-center justify-between border-x-0 border-t-0 px-8 py-3">
+        <BrandMark text size={52} />
+        <Link to="/" className="text-sm text-muted hover:text-brand">Quitter la borne (démo)</Link>
       </header>
-      <main className="flex-1"><Outlet /></main>
+      <main className="min-h-0 flex-1"><Outlet /></main>
     </div>
   )
 }

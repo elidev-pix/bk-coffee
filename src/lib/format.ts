@@ -1,4 +1,4 @@
-const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 })
+const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0, useGrouping: 'always' })
 const dtf = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' })
 const tf = new Intl.DateTimeFormat('fr-FR', { timeStyle: 'short' })
 

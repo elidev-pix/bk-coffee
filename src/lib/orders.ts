@@ -11,7 +11,7 @@ export const ORDER_TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
 /** Transitions de statut de paiement autorisées (un paiement « payé » est final : pas de double paiement). */
 export const PAYMENT_TRANSITIONS: Record<PaymentStatus, PaymentStatus[]> = {
   en_attente: ['paye', 'echoue', 'annule'],
-  echoue: ['paye', 'annule'],
+  echoue: ['paye', 'echoue', 'annule'],
   paye: [],
   annule: [],
 }
@@ -43,3 +43,16 @@ export function buildLines(items: CartItem[], products: Product[]): Result<Order
   }
   return { ok: true, value: lines }
 }
+
+export interface PricedRow { key: string; item: CartItem; product?: Product; optionLabels: string[]; unit: number; total: number; unavailable: boolean }
+/** Prix courants du catalogue (le prix est figé seulement à la création de la commande). */
+export function priceCart(items: CartItem[], products: Product[]) {
+  const rows: PricedRow[] = items.map((item) => {
+    const product = products.find((p) => p.id === item.productId)
+    const opts = (product?.options ?? []).filter((o) => item.optionIds.includes(o.id))
+    const unit = (product?.price ?? 0) + opts.reduce((s, o) => s + o.extraPrice, 0)
+    return { key: cartKey(item), item, product, optionLabels: opts.map((o) => o.label), unit, total: unit * item.quantity, unavailable: !product || !product.available }
+  })
+  return { rows, total: rows.filter((r) => !r.unavailable).reduce((s, r) => s + r.total, 0), count: items.reduce((s, i) => s + i.quantity, 0), hasUnavailable: rows.some((r) => r.unavailable) }
+}
+export const cartKey = (i: CartItem) => `${i.productId}|${[...i.optionIds].sort().join(',')}`
